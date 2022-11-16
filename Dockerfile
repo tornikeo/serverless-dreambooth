@@ -1,7 +1,7 @@
 # Must use at least Cuda version 11+
 FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-runtime
 
-WORKDIR /
+WORKDIR /code/app
 
 # Install git
 RUN apt-get update && apt-get install -y git build-essential
@@ -17,7 +17,7 @@ ADD requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
 # Add your huggingface auth key here, define models
-ENV HF_AUTH_TOKEN=""
+ARG HF_AUTH_TOKEN
 ENV MODEL_NAME="runwayml/stable-diffusion-v1-5"
 ENV OUTPUT_DIR="stable_diffusion_weights/"
 
