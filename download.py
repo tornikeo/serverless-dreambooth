@@ -18,8 +18,13 @@ def download_model():
 
     model = "runwayml/stable-diffusion-v1-5"
     vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse")
-    pipe = StableDiffusionPipeline.from_pretrained(model, vae=vae)
-
+    pipe = StableDiffusionPipeline.from_pretrained(
+        model, 
+        vae=vae, 
+        revision='fp16',
+        torch_dtype=torch.float16, 
+    )
+    pipe.save_pretrained('./model_weights')
     print("done")
 
 

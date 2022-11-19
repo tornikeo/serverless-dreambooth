@@ -1,12 +1,21 @@
 version: '3.9'
 services:
   app:
+    env_file:
+      - .env
     build: 
       context: .
       args:
-        - HF_TOKEN=value
+        - HF_AUTH_TOKEN=$HF_AUTH_TOKEN
     ports:
-      -"8000:8000"
+      - "8000:8000"
     volumes:
       - .:/code/app
-    
+    command: /bin/bash
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

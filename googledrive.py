@@ -60,12 +60,12 @@ def download(file_id):
     return org_file_name
 
 
-def upload(new_ckpt):
-    scope = 'https://www.googleapis.com/auth/drive.file'
-    key_file_location = 'key.json'
-    folder_id = ''        #Models folder
-    file_name = 'model.ckpt'
-    new_file = ''
+def upload(new_ckpt,
+    scope = 'https://www.googleapis.com/auth/drive.file',
+    key_file_location = 'key.json',
+    folder_id = '',        #Models folder
+    file_name = 'model.ckpt',
+    new_file = ''):
     try:
         # Authenticate and construct service.
         service = get_service(
