@@ -5,6 +5,14 @@ import sys
 import requests
 from io import BytesIO
 from PIL import Image
+import time
+
+while True:
+    try:
+        resp = requests.post('http://localhost:8000', json={'file_id':'tornikeo-ml-model-files/db_inp_anidbd30cba.zip'})
+    except Exception as e:
+        print(e)
+        time.sleep(.5)
 
 # #File_id of file in google drive
 # file_id = sys.argv[1:][0]
@@ -30,16 +38,16 @@ from PIL import Image
 # ).to("cuda")
 # print(pipe)
 
-import os
-import json
-import torch
-import zipfile
-import googledrive as gd
-from zipfile import ZipFile
-from transformers import pipeline
-from diffusers.models import AutoencoderKL
-from diffusers import StableDiffusionPipeline
+# import os
+# import json
+# import torch
+# import zipfile
+# import googledrive as gd
+# from zipfile import ZipFile
+# from transformers import pipeline
+# from diffusers.models import AutoencoderKL
+# from diffusers import StableDiffusionPipeline
 
-# zip_file_name = gd.download(zip_file_id)
-newId = gd.upload('model.ckpt')
-print(newId)
+# # zip_file_name = gd.download(zip_file_id)
+# newId = gd.upload('model.ckpt')
+# print(newId)

@@ -1,12 +1,11 @@
 #!/bin/bash
 export NUM_STEPS=1200
-export MODEL_NAME="runwayml/stable-diffusion-v1-5"
-export OUTPUT_DIR="stable_diffusion_weights/"
+# export MODEL_NAME="runwayml/stable-diffusion-v1-5"
+# export OUTPUT_DIR="stable_diffusion_weights/"
 export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH
 
 accelerate launch train_dreambooth.py \
   --pretrained_model_name_or_path=$MODEL_NAME \
-  --pretrained_vae_name_or_path="stabilityai/sd-vae-ft-mse" \
   --output_dir=$OUTPUT_DIR \
   --with_prior_preservation --prior_loss_weight=1.0 \
   --seed=3434554 \
@@ -24,5 +23,7 @@ accelerate launch train_dreambooth.py \
   --max_train_steps=$NUM_STEPS \
   --save_interval=$NUM_STEPS \
   --save_sample_prompt="photo of sks person" \
-  --concepts_list="concepts_list.json" \
+  --concepts_list=$CONCEPTS_LIST_PATH \
   --pad_tokens
+# --pretrained_vae_name_or_path="stabilityai/sd-vae-ft-mse" \
+# --concepts_list="concepts_list.json" \

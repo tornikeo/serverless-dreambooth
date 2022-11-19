@@ -290,12 +290,15 @@ class DreamBoothDataset(Dataset):
         self.class_images_path = []
 
         for concept in concepts_list:
-            inst_img_path = [(x, concept["instance_prompt"]) for x in Path(concept["instance_data_dir"]).iterdir() if x.is_file()]
+            inst_img_path = [(x, concept["instance_prompt"]) for x in Path(concept["instance_data_dir"]).glob('*.jpg') if x.is_file()]
             self.instance_images_path.extend(inst_img_path)
 
             if with_prior_preservation:
-                class_img_path = [(x, concept["class_prompt"]) for x in Path(concept["class_data_dir"]).iterdir() if x.is_file()]
+                class_img_path = [(x, concept["class_prompt"]) for x in Path(concept["class_data_dir"]).glob('*.jpg') if x.is_file()]
                 self.class_images_path.extend(class_img_path[:num_class_images])
+        
+        assert len(self.instance_images_path) > 0
+        assert len(self.class_images_path) > 0
 
         random.shuffle(self.instance_images_path)
         self.num_instance_images = len(self.instance_images_path)
